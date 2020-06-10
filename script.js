@@ -3,7 +3,6 @@ class Game {
         let canvas = document.querySelector('#run-board')
         let context = canvas.getContext('2d')
         this.gameSize = { x: canvas.width, y: canvas.height }
-
         this.player = new Player(this.gameSize)
         this.bodies = []
         this.bodies = this.bodies.concat(new Enemy(this, { x: 0 , y: 0 }))
@@ -25,13 +24,17 @@ class Game {
     }
     
     drawPlayer (context, gameSize) {
-        console.log('draw called')
-        context.fillStyle = 'magenta'
+        // console.log('draw called')
+        // context.fillStyle = 'magenta'
+    
         let startingXPosition = this.player.center.x - this.player.size.x / 2
         let startingYPosition = this.player.center.y - this.player.size.y / 2
-        let playerWidth = this.player.size.x
-        let playerHeight = this.player.size.y
-        context.fillRect(startingXPosition, startingYPosition, playerWidth, playerHeight)
+        // let playerWidth = this.player.size.x
+        // let playerHeight = this.player.size.y
+        let imageUrl = new Image ()
+        imageUrl.src = 'botanical-font-letter-i.jpg'
+        context.drawImage(imageUrl, startingXPosition, startingYPosition)
+        // context.fillRect(startingXPosition, startingYPosition, playerWidth, playerHeight)
     }
 
     drawBodies (context) {
