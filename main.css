@@ -1,3 +1,32 @@
+  
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Shadows Into Light', cursive;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+
 #run-board {
     border: 5px dotted black;
+    background-image: url(mmntm.jpeg);
+    background-size: cover;
 }
+
+.h2 {
+    color:rgb(123, 91, 146);
+    font-size: 4rem; 
+    text-align: center;
+}
+  
+.p {
+    color:rgb(123, 91, 146);
+    font-size: 2rem;
+    text-align: center; 
+}
+
