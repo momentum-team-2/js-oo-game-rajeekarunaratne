@@ -1,3 +1,7 @@
+let song = new Audio(
+    "https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Kevin_MacLeod/Oddities/Kevin_MacLeod_-_Sinfonia_3.mp3"
+  );
+
 class Game {
     constructor () {
         let canvas = document.querySelector('#run-board')
@@ -5,13 +9,13 @@ class Game {
         this.gameSize = { x: canvas.width, y: canvas.height }
         this.player = new Player(this.gameSize)
         this.bodies = []
-        this.bodies = this.bodies.concat(new Enemy(this, 'chartreuse'))
-        this.bodies = this.bodies.concat(new Enemy(this, 'yellow'))
-        this.bodies = this.bodies.concat(new Enemy(this, 'magenta'))
-        this.bodies = this.bodies.concat(new Enemy(this, 'blue'))
-        this.bodies = this.bodies.concat(new Enemy(this, 'brown'))
-        this.music = document.getElementById("music")
-        this.music.load()
+        this.bodies = this.bodies.concat(new Enemy(this))
+        this.bodies = this.bodies.concat(new Enemy(this))
+        this.bodies = this.bodies.concat(new Enemy(this))
+        this.bodies = this.bodies.concat(new Enemy(this))
+        this.bodies = this.bodies.concat(new Enemy(this))
+        this.bodies = this.bodies.concat(new Enemy(this))
+        this.bodies = this.bodies.concat(new Enemy(this))
         
         let animate = () => {
             context.clearRect(0, 0, this.gameSize.x, this.gameSize.y)
@@ -31,16 +35,7 @@ class Game {
         let imageUrl = new Image ()
         imageUrl.src = 'Letter-I.png'
         context.drawImage(imageUrl, startingXPosition, startingYPosition, this.player.size.x, this.player.size.y)
-    }
-
-    drawEnemy (context) {
-
-        let startingXPosition = this.enemy.center.x - this.enemy.size.x / 2
-        let startingYPosition = this.enemy.center.y - this.enemy.size.y / 2
-        let imageUrl = new Image ()
-        imageUrl.src = 'Team.png'
-        context.drawImage(imageUrl, startingXPosition, startingYPosition, this.enemy.size.x, this.enemy.size.y)
-    }    
+    } 
 
     drawBodies (context) {
         for (let body of this.bodies) {
@@ -59,37 +54,39 @@ class Game {
 }
 
 class Enemy {
-    constructor (game , fillColor) {
+    constructor (game) {
         this.game = game
-        this.size = { x: 25, y: 25 }
+        this.size = { x: 50, y: 35 }
         this.center = this.generateStartingPosition(game.gameSize)
-        this.fillColor = fillColor
     }
-
     generateStartingPosition(gameSize) {
         let startingPositionOptions = ["Top", "Right", "Bottom", "Left"];
-        let startingPosition = startingPositionOptions[Math.floor(Math.random() * startingPositionOptions.length)];  
+        let startingPosition = startingPositionOptions[Math.floor(Math.random() * startingPositionOptions.length)];
         if (startingPosition === "Right") {
           return { x: gameSize.x + this.size.x, y: Math.random() * gameSize.y, dir: "L" }
         } else if (startingPosition === "Bottom") {
-          return { x: Math.random() * gameSize.x, y: gameSize.y + this.size.y, dir: "U" } 
+          return { x: Math.random() * gameSize.x, y: gameSize.y + this.size.y, dir: "U" }
         } else if (startingPosition === "Left") {
           return { x: 0 - this.size.x, y:  Math.random() * gameSize.y, dir: "R" }
         } else if (startingPosition === "Top") {
           return { x: Math.random() * gameSize.x, y: 0 - this.size.y, dir: "D" }
         }
       }
-
-    update (context) {  
-        context.fillStyle = this.fillColor
-        context.fillRect(this.center.x, this.center.y, this.size.x, this.size.y)
-
+      draw (context) {
+        let startingXPosition = this.center.x - this.size.x / 2
+        let startingYPosition = this.center.y - this.size.y / 2
+        let imageUrl = new Image ()
+        imageUrl.src = 'team1.png'
+        context.drawImage(imageUrl, startingXPosition, startingYPosition, this.size.x, this.size.y)
+    }
+    update (context) {
+       this.draw(context)
         {
             if (this.center.dir === "L") {
                 if (this.center.x <= 0 - this.size.x) {
                   this.center = this.generateStartingPosition(this.game.gameSize)
                 } else {
-                  this.center.x -= 5 
+                  this.center.x -= 5
                   this.center.y -= 5
                 }
             } else if (this.center.dir === "U") {
@@ -97,7 +94,7 @@ class Enemy {
                   this.center = this.generateStartingPosition(this.game.gameSize)
                 } else {
                   this.center.y -= 5;
-                  this.center.x += 5 
+                  this.center.x += 5
                 }
             } else if (this.center.dir === "R") {
                 if (this.center.x >= this.game.gameSize.x + this.game.gameSize.x) {
@@ -114,7 +111,7 @@ class Enemy {
                   this.center.x -= 5;
                 }
             }
-        }    
+        }
     }
 }
 
@@ -336,3 +333,6 @@ function colliding (b1, b2) {
 }
 
 let game = new Game()
+window.addEventListener("keydown", (event) => {
+    song.play();
+  });

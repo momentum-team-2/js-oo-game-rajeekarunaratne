@@ -3,7 +3,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Shadows Into Light', cursive;
+    font-family: 'Pacifico';
     display: flex;
     flex-wrap: wrap;
     align-content: center;
@@ -13,19 +13,19 @@
 
 
 #run-board {
-    border: 5px dotted black;
+    border: 5px double black;
     background-image: url(mmntm.jpeg);
     background-size: cover;
 }
 
 .h2 {
-    color:rgb(123, 91, 146);
+    color:purple;
     font-size: 4rem; 
     text-align: center;
 }
   
 .p {
-    color:rgb(123, 91, 146);
+    color:purple;
     font-size: 2rem;
     text-align: center; 
 }
